@@ -5,11 +5,15 @@ import lombok.ToString;
 
 @AllArgsConstructor
 @ToString
-public class Cat {
+public class Cat implements MyComparable {
     private int weight;
     private int height;
 
-    public int compare(Cat other) {
-        return this.weight < other.weight ? -1 : this.weight == other.weight ? 0 : 1 ;
+    @Override
+    public int compareTo(Object o) { // 需要强转
+        Cat other = (Cat) o;
+        if (this.weight > other.weight) return 1;
+        else if (this.weight < other.weight) return -1;
+        else return 0;
     }
 }
